@@ -6,8 +6,6 @@ import TextInput from "./components/TextInput";
 import ModalKeywords from "./components/ModalKeywords";
 
 function App() {
-  const reactURL = process.env.REACT_APP_OPENAI_API_URL;
-  const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 
   const [keywords, setKeywords] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +19,7 @@ function App() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
+        Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: 'text-davinci-003',
@@ -32,7 +30,7 @@ function App() {
       })
     }
 
-    const response = await fetch(reactURL, options);
+    const response = await fetch(process.env.REACT_APP_OPENAI_API_URL, options);
     
     const json = await response.json();
 
